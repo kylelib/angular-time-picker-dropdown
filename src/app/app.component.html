@@ -1,0 +1,18 @@
+<hello name="{{ name }}"></hello>
+<p>
+  Start editing to see some magic happen :)
+</p>
+<input type="checkbox" [(ngModel)]="showMilitaryTime">Military Time
+<p>
+<label for="time-picker" class="lhi-field-label">Pick or enter a time</label>
+<lhi-time-picker
+  name="time-picker"
+  [showMilitaryTime]="showMilitaryTime"
+  [interval]="30"
+  [baseDate]="startDate"
+  (timeInputChange)="timeSelected($event)"
+></lhi-time-picker>
+
+<p>
+  <div>Date & Time {{ selectedTime?.date  }}</div>
+  <div>Time String {{ selectedTime?.time  }}</div>
