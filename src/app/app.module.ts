@@ -8,7 +8,10 @@ import { TimePickerComponent } from './time-picker/time-picker.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule],
-  declarations: [AppComponent, HelloComponent, TimePickerComponent],
+  declarations: [
+    AppComponent, 
+    HelloComponent, 
+    TimePickerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

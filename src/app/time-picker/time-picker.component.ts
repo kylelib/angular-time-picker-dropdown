@@ -11,14 +11,12 @@ export class TimePickerComponent implements OnInit, OnDestroy {
   //       we return validations from child controls?
   // TODO: Need to provide ngModel capability
 
-  testInput: string;
-  selectedTimeString: string;
+  timeInput: string;
   timeFormat: string = 'hh:mm A';
   standardPattern = '^([\\d]|[0-1][0-9]):(0|1|2|3|4|5)[\\d] (a|A|p|P)[mM]$';
   militaryPattern =
     '([\\d]|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23):(0|1|2|3|4|5)[\\d]';
-  timePattern =
-    '([\\d]|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23):(0|1|2|3|4|5)[\\d]';
+  timePattern: string;
   _interval: number = 30;
   @Input() get interval(): number {
     return this._interval;
@@ -30,6 +28,8 @@ export class TimePickerComponent implements OnInit, OnDestroy {
       throw 'Interval must be divisible by 60';
     }
   }
+
+  @Input() showDefaultErrors: boolean = true;
 
   // TODO: Condider allowing timeformat input -- how would we validate it?
   _showMilitaryTime: boolean = false;
@@ -66,8 +66,6 @@ export class TimePickerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.timePattern = this.standardPattern;
-
-    //this.getTimes2();
   }
 
   ngOnDestroy(): void {
@@ -95,6 +93,7 @@ export class TimePickerComponent implements OnInit, OnDestroy {
       console.log('IsValid', m.isValid());
       if (m.isValid()) {
         console.log(m.toDate());
+        this.timeInputChange.emit({ date: m.toDate(), time: this.timeInput, timeFormat: this.timeFormat})
       }
     }
   }
@@ -112,22 +111,9 @@ export class TimePickerComponent implements OnInit, OnDestroy {
   // default interval = 30 minutes -- interval must be divisible by 60
   // Array size = 60/interval * 24
   // e.g. 30 minutes = 48 entries
-  getTimesX = () => {
-    const intervals = (60 / this.interval) * 24;
-    const items = [];
-    //let currentDate = moment('12');
-    let currentDate = moment(this.baseDate.toDateString());
-    new Array(intervals).fill('noop').map((acc, index) => {
-      items.push(currentDate.format(this.timeFormat));
-      currentDate = currentDate.add(this.interval, 'minutes');
-    });
-    return items;
-  };
-
   getTimes = () => {
     const intervals = (60 / this.interval) * 24;
     const items = [];
-    //let currentDate = moment('12');
     let currentDate = moment(this.baseDate.toDateString());
     new Array(intervals).fill('noop').map((acc, index) => {
       items.push({

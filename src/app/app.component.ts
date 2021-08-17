@@ -10,9 +10,12 @@ export class AppComponent  {
   name = 'Angular ' + VERSION.major;
   selectedTime: any;
 
-  startDate = moment('2021-07-27').toDate();
+  selectedModel: any;
+
+  //startDate = moment('2021-07-27').toDate();
+  startDate = moment().toDate();
   _showMilitaryTime: boolean =false;
-  @Input() get showMilitaryTime () {
+  get showMilitaryTime () {
     return this._showMilitaryTime;
   }
   set showMilitaryTime(value: boolean) {
@@ -28,6 +31,7 @@ export class AppComponent  {
 
   timeSelected = (event) => {
     console.log("Time Selected:", event);
+    console.log("selected model:", this.selectedModel);
     this.selectedTime = event;
   }
 }

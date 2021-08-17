@@ -1,43 +1,23 @@
 <div class="time-picker-container">
 
   <input
-    #startTimeInput="ngModel"
+    #timePickerInput="ngModel"
     type="text"
     id="time-input"
     name="time-input"
     class="form-style"
     list="startTimeList"
-    [maxlength]="timeInputMaxLength(selectedTimeString)"
+    [maxlength]="timeInputMaxLength(timeInput)"
     [pattern]="timePattern"
-    [(ngModel)]="selectedTimeString"
+    [(ngModel)]="timeInput"
     (ngModelChange)="timeInputChanged($event)"
-    (keypress)="timeInputKeyPress($event, selectedTimeString)"
+    (keypress)="timeInputKeyPress($event, timeInput)"
   >
-<datalist id="startTimeList">
-  <option *ngFor="let startTime of getTimes()" [ngValue]="startTime">{{ startTime.time }}
-</datalist>
-<div *ngIf="startTimeInput.errors && startTimeInput.errors?.pattern" class="form-message">
-  <span>Please enter a valid 24 hour time.</span>
-</div>
+  <datalist id="startTimeList">
+    <option *ngFor="let startTime of getTimes()" [ngValue]="startTime">{{ startTime.time }}
+  </datalist>
+  <div *ngIf="timePickerInput.errors && timePickerInput.errors?.pattern && showDefaultErrors" class="form-message">
+    <span>Please enter a valid {{showMilitaryTime ? "24 hour" : "AM/PM"}} time.</span>
+  </div>
 
-  <!-- <p>
-  <input type="text" #codeInput="ngModel" [pattern]="testPattern" name="code" [(ngModel)]="selectedTimeString" />
-  <div>valid: {{codeInput.valid}}</div>
-
-  <input name="username" [(ngModel)]="selectedTimeString" [pattern]="'[0-9]*'" #uname="ngModel"> 
-  <div>valid: {{uname.valid}}</div> -->
-  <p>
-    <input
-      type="text"
-      list="testList"
-      pattern="One|Two|Three"
-      [(ngModel)]="testInput">
-      <dataList id="testList">
-        <option [ngValue]="1">{{"One"}}
-        <option [ngValue]="2">{{"Two"}}
-        <option [ngValue]="3">{{"Three"}}
-
-      </dataList>
-
-  </p>
 </div>
