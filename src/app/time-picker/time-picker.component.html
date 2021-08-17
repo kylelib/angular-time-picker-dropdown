@@ -6,15 +6,15 @@
     id="time-input"
     name="time-input"
     class="form-style"
-    list="startTimeList"
+    list="timeList"
     [maxlength]="timeInputMaxLength(timeInput)"
     [pattern]="timePattern"
     [(ngModel)]="timeInput"
     (ngModelChange)="timeInputChanged($event)"
     (keypress)="timeInputKeyPress($event, timeInput)"
   >
-  <datalist id="startTimeList">
-    <option *ngFor="let startTime of getTimes()" [ngValue]="startTime">{{ startTime.time }}
+  <datalist id="timeList">
+    <option *ngFor="let time of getTimes()" [ngValue]="time">{{ time.time }}
   </datalist>
   <div *ngIf="timePickerInput.errors && timePickerInput.errors?.pattern && showDefaultErrors" class="form-message">
     <span>Please enter a valid {{showMilitaryTime ? "24 hour" : "AM/PM"}} time.</span>

@@ -13,9 +13,10 @@ export class TimePickerComponent implements OnInit, OnDestroy {
 
   timeInput: string;
   timeFormat: string = 'hh:mm A';
-  standardPattern = '^([\\d]|[0-1][0-9]):(0|1|2|3|4|5)[\\d] (a|A|p|P)[mM]$';
+  //standardPattern = '^([0-9]|[0-1][0-9]):(0|1|2|3|4|5)[0-9] (a|A|p|P)[mM]$';
+  standardPattern = '^([0-9]|[0-1][0-9]):(0|1|2|3|4|5)[0-9] (am|AM|pm|PM)$';
   militaryPattern =
-    '([\\d]|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23):(0|1|2|3|4|5)[\\d]';
+    '([0-9]|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23):(0|1|2|3|4|5)[0-9]';
   timePattern: string;
   _interval: number = 30;
   @Input() get interval(): number {
