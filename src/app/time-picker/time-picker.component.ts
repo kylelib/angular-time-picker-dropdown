@@ -104,8 +104,19 @@ export class TimePickerComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  timeInputKeyPress(event, model) {
-    console.log('timeInputKeyPress', event, model, this.timePattern);
+  timeInputKeyPress(e, model) {
+    console.log('timeInputKeyPress', e, model, this.timePattern);
+    // TODO: Military time is tested -- standard is not
+    if (this.showMilitaryTime && !e.key.match(/[0-9:]/)) {
+      e.preventDefault();
+    } else if (!this.showMilitaryTime && !e.key.match(/[0-9:apm ]/i)) {
+      e.preventDefault();
+    }
+
+    if (!model && e.key == ':') {
+      e.preventDefault();
+    }
+
   }
 
   // Returns a list of times in the data by interval specified
